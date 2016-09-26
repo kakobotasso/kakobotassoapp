@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +28,8 @@ public class BoasVindasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boas_vindas);
 
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
         listaApps = (RecyclerView) findViewById(R.id.lista_apps);
         listaApps.setHasFixedSize(true);
 
@@ -45,6 +49,8 @@ public class BoasVindasActivity extends AppCompatActivity {
 
                 ListaAppsAdapter adapater = new ListaAppsAdapter(appList, BoasVindasActivity.this);
                 listaApps.setAdapter(adapater);
+
+                progressBar.setVisibility(View.GONE);
 
             }
 

@@ -19,7 +19,7 @@ import java.util.List;
 import br.com.ezeqlabs.kakobotasso.adapters.ListaAppsAdapter;
 import br.com.ezeqlabs.kakobotasso.model.App;
 
-public class BoasVindasActivity extends AppCompatActivity {
+public class ListaAppsActivity extends AppCompatActivity {
     private List<App> appList = new ArrayList<>();
     private RecyclerView listaApps;
 
@@ -47,7 +47,7 @@ public class BoasVindasActivity extends AppCompatActivity {
                     appList.add(app);
                 }
 
-                ListaAppsAdapter adapater = new ListaAppsAdapter(appList, BoasVindasActivity.this);
+                ListaAppsAdapter adapater = new ListaAppsAdapter(appList, ListaAppsActivity.this);
                 listaApps.setAdapter(adapater);
 
                 progressBar.setVisibility(View.GONE);

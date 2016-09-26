@@ -43,7 +43,7 @@ public class EzeqlabsActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent lugares = new Intent(EzeqlabsActivity.this, BoasVindasActivity.class);
+                Intent lugares = new Intent(EzeqlabsActivity.this, ListaAppsActivity.class);
                 startActivity(lugares);
                 finish();
             }

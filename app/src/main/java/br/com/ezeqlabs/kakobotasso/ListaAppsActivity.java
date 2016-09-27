@@ -31,7 +31,7 @@ public class ListaAppsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_boas_vindas);
+        setContentView(R.layout.activity_lista_apps);
 
         inicializaElementos();
         trataRecyclerView();

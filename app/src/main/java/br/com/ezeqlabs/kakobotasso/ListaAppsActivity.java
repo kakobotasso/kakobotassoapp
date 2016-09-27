@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -33,6 +34,9 @@ public class ListaAppsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_apps);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         inicializaElementos();
         trataRecyclerView();
         buscaApps();
@@ -41,7 +45,7 @@ public class ListaAppsActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+        overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
     }
 
     private void inicializaElementos(){
@@ -79,5 +83,16 @@ public class ListaAppsActivity extends AppCompatActivity {
                 FirebaseCrash.report(new Exception("Erro ao carregar projetos. >>>> " + error));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

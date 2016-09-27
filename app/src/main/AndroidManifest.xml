@@ -10,14 +10,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EzeqlabsActivity">
+        <activity
+            android:name=".EzeqlabsActivity"
+            android:theme="@style/EzeqlabsTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListaAppsActivity"></activity>
+        <activity
+            android:name=".ListaAppsActivity"
+            android:label="@string/label_lista_apps" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

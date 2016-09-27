@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kako Botasso</string>
     <string name="desenvolvedor">Desenvolvedor Web e Mobile</string>
+    <string name="label_lista_apps">Apps</string>
 </resources>

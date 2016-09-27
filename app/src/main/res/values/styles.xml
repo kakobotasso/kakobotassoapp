@@ -10,4 +10,17 @@
 
     <style name="EzeqlabsTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
+    <style name="botoesMenuPrincipal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/branco</item>
+    </style>
+
 </resources>

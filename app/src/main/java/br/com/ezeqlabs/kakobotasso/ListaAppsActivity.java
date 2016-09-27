@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -23,24 +24,43 @@ import br.com.ezeqlabs.kakobotasso.model.App;
 public class ListaAppsActivity extends AppCompatActivity {
     private List<App> appList = new ArrayList<>();
     private RecyclerView listaApps;
+    private ProgressBar progressBar;
+    private FirebaseDatabase database;
+    private DatabaseReference apps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boas_vindas);
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        inicializaElementos();
+        trataRecyclerView();
+        buscaApps();
+    }
 
-        listaApps = (RecyclerView) findViewById(R.id.lista_apps);
-        listaApps.setHasFixedSize(true);
+    @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+    }
+
+    private void inicializaElementos(){
+        this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        this.listaApps = (RecyclerView) findViewById(R.id.lista_apps);
+        this.database = FirebaseDatabase.getInstance();
+    }
+
+    private void trataRecyclerView(){
+        this.listaApps.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        listaApps.setLayoutManager(linearLayoutManager);
+        this.listaApps.setLayoutManager(linearLayoutManager);
+    }
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("apps");
-        myRef.addValueEventListener(new ValueEventListener() {
+    private void buscaApps(){
+        apps = this.database.getReference("apps");
+        apps.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot appSnapshot : dataSnapshot.getChildren()){
@@ -59,11 +79,5 @@ public class ListaAppsActivity extends AppCompatActivity {
                 FirebaseCrash.report(new Exception("Erro ao carregar projetos. >>>> " + error));
             }
         });
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 }

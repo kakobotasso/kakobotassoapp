@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,8 +38,8 @@ public class ListaAppsAdapter extends RecyclerView.Adapter<ListaAppsAdapter.AppV
     }
 
     @Override
-    public void onBindViewHolder(ListaAppsAdapter.AppViewHolder holder, int position) {
-        App app = appList.get(position);
+    public void onBindViewHolder(final ListaAppsAdapter.AppViewHolder holder, int position) {
+        final App app = appList.get(position);
         holder.nomeApp.setText(app.getNome());
 
         if( app.getTecnologia().equalsIgnoreCase("Unity")  ){
@@ -47,7 +50,18 @@ public class ListaAppsAdapter extends RecyclerView.Adapter<ListaAppsAdapter.AppV
             holder.tecnologiaApp.setImageResource(R.mipmap.swift_logo);
         }
 
-        Picasso.with(boasVindasActivity).load(app.getImagem()).into(holder.imagemApp);
+        Picasso.with(boasVindasActivity).load(app.getImagem()).into(holder.imagemApp, new Callback() {
+            @Override
+            public void onSuccess() {
+                holder.progressBarApp.setVisibility(View.GONE);
+                holder.imagemApp.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                FirebaseCrash.report(new Exception("Erro ao carregar imagem do projeto" + app.getNome()));
+            }
+        });
 
     }
 
@@ -72,6 +86,7 @@ public class ListaAppsAdapter extends RecyclerView.Adapter<ListaAppsAdapter.AppV
         protected TextView nomeApp;
         protected ImageView tecnologiaApp;
         protected ImageView imagemApp;
+        protected ProgressBar progressBarApp;
 
         public AppViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +99,7 @@ public class ListaAppsAdapter extends RecyclerView.Adapter<ListaAppsAdapter.AppV
             nomeApp = (TextView) itemView.findViewById(R.id.nome_app);
             tecnologiaApp = (ImageView) itemView.findViewById(R.id.tecnologia_app);
             imagemApp = (ImageView) itemView.findViewById(R.id.imagem_app);
+            progressBarApp = (ProgressBar) itemView.findViewById(R.id.progressbar_imagem_app);
         }
     }
 }

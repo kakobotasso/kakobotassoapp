@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,12 +52,11 @@ public class ListaAppsActivity extends AppCompatActivity {
                 listaApps.setAdapter(adapater);
 
                 progressBar.setVisibility(View.GONE);
-
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-
+                FirebaseCrash.report(new Exception("Erro ao carregar projetos. >>>> " + error));
             }
         });
     }

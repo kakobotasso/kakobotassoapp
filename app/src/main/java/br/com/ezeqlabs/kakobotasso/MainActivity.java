@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(listaApps);
             }
         });
+
+        Button btnSites = (Button) findViewById(R.id.btn_sites);
+        btnSites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent listaSites = new Intent(MainActivity.this, ListaSitesActivity.class);
+                startActivity(listaSites);
+            }
+        });
     }
 
     @Override

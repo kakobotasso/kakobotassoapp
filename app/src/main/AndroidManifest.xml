@@ -22,7 +22,13 @@
         <activity
             android:name=".ListaAppsActivity"
             android:label="@string/label_lista_apps" />
-        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".MainActivity" />
+
+        <activity
+            android:name=".ListaSitesActivity"
+            android:label="@string/label_lista_sites"
+            />
     </application>
 
 </manifest>
